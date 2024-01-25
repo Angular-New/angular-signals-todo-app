@@ -5,7 +5,7 @@
     class="new-todo"
     placeholder="What needs to be done?"
     autofocus
-    [value]="value$ | async"
+    [value]="value()"
     (keyup)="onChangeTodo($event)"
     (keyup.enter)="onAddTodo()"
   />

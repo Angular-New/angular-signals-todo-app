@@ -1,4 +1,4 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 
 import { TodoModel } from '../models';
@@ -8,7 +8,7 @@ import { ITodo } from '../types';
   providedIn: 'root',
 })
 export class TodosService {
-  public todos: WritableSignal<ITodo[]> = signal<ITodo[]>([]);
+  public todos = signal<ITodo[]>([]);
 
   /**
    * Add new task to store

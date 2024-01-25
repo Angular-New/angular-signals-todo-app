@@ -1,6 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 
 import { TodosService } from '@services/todos.service';
 
@@ -14,17 +13,15 @@ import { TodosService } from '@services/todos.service';
 })
 export class HeaderComponent {
   private readonly _todosService: TodosService = inject(TodosService);
-  private _value$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
-  public value$: Observable<string> = this._value$.asObservable();
+  public value = signal<string>('');
 
   public onChangeTodo(event: Event): void {
     const target: HTMLInputElement = event.target as HTMLInputElement;
-    this._value$.next(target.value);
+    this.value.set(target.value);
   }
 
   public onAddTodo(): void {
-    this._todosService.addTodo(this._value$.value);
-    this._value$.next('');
+    this._todosService.addTodo(this.value());
+    this.value.set('');
   }
 }

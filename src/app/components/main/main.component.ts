@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, WritableSignal, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { TodosService } from '@services/todos.service';
-
-import { ITodo } from '../../shared/types';
 
 @Component({
   selector: 'td-main',
@@ -13,7 +11,5 @@ import { ITodo } from '../../shared/types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent {
-  private readonly _todosService: TodosService = inject(TodosService);
-
-  public todos: WritableSignal<ITodo[]> = this._todosService.todos;
+  public readonly todos = inject(TodosService).todos;
 }
