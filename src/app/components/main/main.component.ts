@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'td-main',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent {}
