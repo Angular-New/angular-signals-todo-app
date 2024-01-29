@@ -32,6 +32,12 @@ export class TodosService {
     console.log(this.todosSig());
   }
 
+  public completeTodo(id: string): void {
+    this.todosSig.update((todos: ITodo[]) =>
+      todos.map((todo: ITodo) => (todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo)),
+    );
+  }
+
   public changeFilter(filter: EFilter): void {
     this.filterSig.set(filter);
   }
