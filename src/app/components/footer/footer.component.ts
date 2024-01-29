@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { TodosService } from '@services/todos.service';
 
 import { EFilter } from '../../shared/enums';
-import { ITodo } from '../../shared/types';
 
 @Component({
   selector: 'td-footer',
@@ -20,12 +19,8 @@ export class FooterComponent {
   protected readonly EFilter = EFilter;
 
   public readonly filterSig = inject(TodosService).filterSig;
-
-  public readonly countActiveTodosSig = computed(
-    () => this._todosService.todosSig().filter((todo: ITodo) => !todo.isCompleted).length,
-  );
-
-  public readonly isEmptyTodos = computed(() => this._todosService.todosSig().length === 0);
+  public readonly countActiveTodosSig = inject(TodosService).countActiveTodosSig;
+  public readonly isEmptyTodos = inject(TodosService).isEmptyTodos;
 
   public readonly message = computed(() => `item${this.countActiveTodosSig() !== 1 ? 's' : ''} left`);
 

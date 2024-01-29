@@ -1,5 +1,16 @@
-<section class="main">
-  <div class="todo-list">
+<section
+  class="main"
+  [ngClass]="{ hidden: isEmptyTodos() }"
+>
+  <input
+    type="checkbox"
+    class="toggle-all"
+    id="toggle-all"
+    [checked]="isAllTodosChecked()"
+    (change)="toggleAllTodos($event)"
+  />
+  <label for="toggle-all">Mark all todos as completed</label>
+  <ul class="todo-list">
     @for (todo of visibleTodosSig(); track todo.id) {
       <td-todo
         [todo]="todo"
@@ -7,5 +18,5 @@
         (setEditingId)="setEditingId($event)"
       />
     }
-  </div>
+  </ul>
 </section>

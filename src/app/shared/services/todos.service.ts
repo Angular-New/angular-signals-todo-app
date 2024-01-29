@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 
 import { EFilter } from '../enums';
@@ -12,10 +12,12 @@ export class TodosService {
   public filterSig = signal<EFilter>(EFilter.all);
   public todosSig = signal<ITodo[]>([]);
 
-  /**
-   * Add new task to store
-   * @param value { string }
-   */
+  public readonly isEmptyTodos = computed(() => this.todosSig().length === 0);
+
+  public readonly countActiveTodosSig = computed(
+    () => this.todosSig().filter((todo: ITodo) => !todo.isCompleted).length,
+  );
+
   public addTodo(value: string): void {
     if (value !== '') {
       const newTodo: ITodo = new TodoModel(uuidv4(), value, false);
@@ -36,6 +38,10 @@ export class TodosService {
     this.todosSig.update((todos: ITodo[]) =>
       todos.map((todo: ITodo) => (todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo)),
     );
+  }
+
+  public toggleAllTodos(toggle: boolean): void {
+    this.todosSig.update((todos: ITodo[]) => todos.map((todo: ITodo) => ({ ...todo, isCompleted: toggle })));
   }
 
   public changeFilter(filter: EFilter): void {
