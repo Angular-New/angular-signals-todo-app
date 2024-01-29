@@ -27,6 +27,11 @@ export class TodosService {
     this.todosSig.update((todos: ITodo[]) => todos.map((todo: ITodo) => (todo.id === id ? { ...todo, text } : todo)));
   }
 
+  public removeTodo(id: string): void {
+    this.todosSig.update((todos: ITodo[]) => todos.filter((todo: ITodo) => todo.id !== id));
+    console.log(this.todosSig());
+  }
+
   public changeFilter(filter: EFilter): void {
     this.filterSig.set(filter);
   }

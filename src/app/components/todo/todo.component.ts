@@ -40,4 +40,8 @@ export class TodoComponent implements OnInit {
   public setEditMode(): void {
     this.setEditingId.emit(this.todo.id);
   }
+
+  public removeTodo(id: string): void {
+    this._todosService.removeTodo(id);
+  }
 }

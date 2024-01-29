@@ -1,6 +1,10 @@
 <li [ngClass]="{ editing: isEditing }">
   <div class="view">
     <label (dblclick)="setEditMode()">{{ todo.text }}</label>
+    <button
+      class="destroy"
+      (click)="removeTodo(todo.id)"
+    ></button>
   </div>
 
   @if(isEditing) {
