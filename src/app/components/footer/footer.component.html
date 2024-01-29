@@ -1,1 +1,32 @@
-<p>footer works!</p>
+<div
+  class="footer"
+  [ngClass]="{ hidden: isEmptyTodos() }"
+>
+  <span class="todo-count">
+    <strong>{{ countActiveTodosSig() }}</strong>
+    {{ message() }}
+  </span>
+  <ul class="filters">
+    <li>
+      <a
+        href="#"
+        [ngClass]="{ selected: filterSig() === EFilter.all }"
+        (click)="changeFilter(EFilter.all)"
+      >All</a>
+    </li>
+    <li>
+      <a
+        href="#"
+        [ngClass]="{ selected: filterSig() === EFilter.active }"
+        (click)="changeFilter(EFilter.active)"
+      >Active</a>
+    </li>
+    <li>
+      <a
+        href="#"
+        [ngClass]="{ selected: filterSig() === EFilter.completed }"
+        (click)="changeFilter(EFilter.completed)"
+      >Completed</a>
+    </li>
+  </ul>
+</div>

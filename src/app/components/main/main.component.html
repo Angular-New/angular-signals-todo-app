@@ -1,6 +1,6 @@
 <section class="main">
   <div class="todo-list">
-    @for (todo of todos(); track todo.id) {
+    @for (todo of visibleTodosSig(); track todo.id) {
       <div>{{ todo.text }}</div>
     }
   </div>
