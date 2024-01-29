@@ -17,8 +17,14 @@ export class TodosService {
    * @param value { string }
    */
   public addTodo(value: string): void {
-    const newTodo: ITodo = new TodoModel(uuidv4(), value, false);
-    this.todosSig.update((todos: ITodo[]) => [...todos, newTodo]);
+    if (value !== '') {
+      const newTodo: ITodo = new TodoModel(uuidv4(), value, false);
+      this.todosSig.update((todos: ITodo[]) => [...todos, newTodo]);
+    }
+  }
+
+  public updateTodo(text: string, id: string): void {
+    this.todosSig.update((todos: ITodo[]) => todos.map((todo: ITodo) => (todo.id === id ? { ...todo, text } : todo)));
   }
 
   public changeFilter(filter: EFilter): void {

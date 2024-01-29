@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 
+import { TodoComponent } from '@components/todo/todo.component';
 import { TodosService } from '@services/todos.service';
 
 import { EFilter } from '../../shared/enums';
@@ -8,7 +9,7 @@ import { ITodo } from '../../shared/types';
 @Component({
   selector: 'td-main',
   standalone: true,
-  imports: [],
+  imports: [TodoComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,4 +28,10 @@ export class MainComponent {
         return this._todosSig();
     }
   });
+
+  public editingId: string | null = null;
+
+  public setEditingId(id: string | null): void {
+    this.editingId = id;
+  }
 }

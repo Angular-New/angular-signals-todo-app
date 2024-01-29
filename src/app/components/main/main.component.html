@@ -1,7 +1,11 @@
 <section class="main">
   <div class="todo-list">
     @for (todo of visibleTodosSig(); track todo.id) {
-      <div>{{ todo.text }}</div>
+      <td-todo
+        [todo]="todo"
+        [isEditing]="editingId === todo.id"
+        (setEditingId)="setEditingId($event)"
+      />
     }
   </div>
 </section>
